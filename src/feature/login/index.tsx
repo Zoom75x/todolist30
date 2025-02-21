@@ -1,7 +1,10 @@
 import {Flex, Input, Button} from "@/shared";
 import {useState} from "react";
+import {useAppDispatch, useAppSelector} from "@/app/store";
+import {signIn} from "@/entity/user/api/signIn.ts";
 
 export const Login = () => {
+    const dispatch = useAppDispatch()
     const [login, setLogin]=useState('')
     const [password, setPassword]=useState('')
     const [error, setError] = useState(false)
@@ -9,6 +12,7 @@ export const Login = () => {
     const onClick = () => {
     if (login&&password) {
         console.log(login,password)
+        dispatch(signIn({password, username: login}))
     } else
         setError(true)
     }
